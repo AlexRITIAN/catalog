@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "io.github.alexritian"
-version = "0.0.3-SNAPSHOT"
+version = "0.0.4-SNAPSHOT"
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -18,18 +18,19 @@ repositories {
 
 catalog {
     versionCatalog {
-        // Define versions
+        // Define plugin versions
         version("publish", "0.30.0")
-        version("commons-math3", "3.6.1")
-        version("guava", "33.2.1-jre")
-        version("junit-jupiter", "5.10.3")
-        version("jooq", "3.19.1")
         version("flyway", "10.12.0")
-        version("testcontainers", "1.19.8")
-        version("spring-boot", "3.3.5")
         version("gradle-jooq-plugin", "9.0")
-        version("postgresql", "42.7.3")
-        version("lombok", "1.18.32")
+
+        // Define library versions
+        version("junit-jupiter", "5.11.3")
+        version("junit-platform-launcher", "1.11.3")
+        version("jooq", "3.19.15")
+        version("testcontainers", "1.20.3")
+        version("spring-boot", "3.3.5")
+        version("postgresql", "42.7.4")
+        version("lombok", "1.18.34")
 
         // Define plugins
         plugin("publish", "com.vanniktech.maven.publish").versionRef("publish")
@@ -38,9 +39,8 @@ catalog {
         plugin("spring-boot", "org.springframework.boot").versionRef("spring-boot")
 
         // Define libraries
-        library("commons-math3", "org.apache.commons", "commons-math3").versionRef("commons-math3")
-        library("guava", "com.google.guava", "guava").versionRef("guava")
         library("junit-jupiter", "org.junit.jupiter", "junit-jupiter").versionRef("junit-jupiter")
+        library("junit-platform-launcher", "org.junit.platform", "junit-platform-launcher").versionRef("junit-platform-launcher")
         library("lombok", "org.projectlombok", "lombok").versionRef("lombok")
 
         // Spring Boot libraries
@@ -68,7 +68,7 @@ catalog {
 
         // bundles
         bundle(
-            "spring-boot-starter-all", listOf(
+            "spring-boot-starter-web-pg-jooq", listOf(
                 "spring-boot-starter",
                 "spring-boot-starter-test",
                 "spring-boot-starter-web",
@@ -76,6 +76,9 @@ catalog {
                 "postgresql",
             )
         )
+        bundle("jooq-all", listOf("jooq", "jooq-codegen"))
+        bundle("testcontainers-pg", listOf("testcontainers-postgresql", "testcontainers-junit-jupiter"))
+        bundle("flyway-pg", listOf("flyway-core", "flyway-database-postgresql"))
     }
 }
 
