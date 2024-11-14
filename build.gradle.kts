@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "io.github.alexritian"
-version = "0.0.4-SNAPSHOT"
+version = "0.0.5-SNAPSHOT"
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -31,6 +31,7 @@ catalog {
         version("spring-boot", "3.3.5")
         version("postgresql", "42.7.4")
         version("lombok", "1.18.34")
+        version("annotations", "26.0.1")
 
         // Define plugins
         plugin("publish", "com.vanniktech.maven.publish").versionRef("publish")
@@ -66,6 +67,7 @@ catalog {
         library("testcontainers-postgresql", "org.testcontainers", "postgresql").versionRef("testcontainers")
         library("testcontainers-junit-jupiter", "org.testcontainers", "junit-jupiter").versionRef("testcontainers")
 
+        library("jetbrains-annotations", "org.jetbrains", "annotations").versionRef("annotations")
         // bundles
         bundle(
             "spring-boot-starter-web-pg-jooq", listOf(
