@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "io.github.alexritian"
-version = "0.0.5-SNAPSHOT"
+version = "0.0.6-SNAPSHOT"
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -22,6 +22,7 @@ catalog {
         version("publish", "0.30.0")
         version("flyway", "10.12.0")
         version("gradle-jooq-plugin", "9.0")
+        version("plugin-publish", "1.3.0")
 
         // Define library versions
         version("junit-jupiter", "5.11.3")
@@ -38,6 +39,7 @@ catalog {
         plugin("flyway", "org.flywaydb.flyway").versionRef("flyway")
         plugin("gradle-jooq-plugin", "nu.studer.jooq").versionRef("gradle-jooq-plugin")
         plugin("spring-boot", "org.springframework.boot").versionRef("spring-boot")
+        plugin("plugin-publish", "com.gradle.plugin-publish").versionRef("plugin-publish")
 
         // Define libraries
         library("junit-jupiter", "org.junit.jupiter", "junit-jupiter").versionRef("junit-jupiter")
@@ -59,7 +61,7 @@ catalog {
         // JOOQ libraries
         library("jooq", "org.jooq", "jooq").versionRef("jooq")
         library("jooq-codegen", "org.jooq", "jooq-codegen").versionRef("jooq")
-
+        library("gradle-jooq-plugin", "nu.studer", "gradle-jooq-plugin").versionRef("gradle-jooq-plugin")
         // Database library
         library("postgresql", "org.postgresql", "postgresql").versionRef("postgresql")
 
