@@ -3,13 +3,12 @@ import com.vanniktech.maven.publish.SonatypeHost
 plugins {
     java
     `version-catalog`
-//    `maven-publish`
     signing
     id("com.vanniktech.maven.publish") version "0.30.0"
 }
 
 group = "io.github.alexritian"
-version = "0.0.4-SNAPSHOT"
+version = "0.0.9"
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -18,27 +17,30 @@ repositories {
 
 catalog {
     versionCatalog {
-        // Define plugin versions
+        // plugin versions
         version("publish", "0.30.0")
         version("flyway", "10.12.0")
         version("gradle-jooq-plugin", "9.0")
+        version("plugin-publish", "1.3.0")
 
-        // Define library versions
+        // library versions
         version("junit-jupiter", "5.11.3")
         version("junit-platform-launcher", "1.11.3")
-        version("jooq", "3.19.15")
         version("testcontainers", "1.20.3")
-        version("spring-boot", "3.3.5")
+        version("spring-boot", "3.5.0")
+        version("jooq", "3.19.23")
         version("postgresql", "42.7.4")
         version("lombok", "1.18.34")
+        version("annotations", "26.0.1")
 
-        // Define plugins
+        // plugins
         plugin("publish", "com.vanniktech.maven.publish").versionRef("publish")
         plugin("flyway", "org.flywaydb.flyway").versionRef("flyway")
         plugin("gradle-jooq-plugin", "nu.studer.jooq").versionRef("gradle-jooq-plugin")
         plugin("spring-boot", "org.springframework.boot").versionRef("spring-boot")
+        plugin("plugin-publish", "com.gradle.plugin-publish").versionRef("plugin-publish")
 
-        // Define libraries
+        // libraries
         library("junit-jupiter", "org.junit.jupiter", "junit-jupiter").versionRef("junit-jupiter")
         library("junit-platform-launcher", "org.junit.platform", "junit-platform-launcher").versionRef("junit-platform-launcher")
         library("lombok", "org.projectlombok", "lombok").versionRef("lombok")
@@ -56,9 +58,10 @@ catalog {
         library("flyway-database-postgresql", "org.flywaydb", "flyway-database-postgresql").versionRef("flyway")
 
         // JOOQ libraries
-        library("jooq", "org.jooq", "jooq").versionRef("jooq")
-        library("jooq-codegen", "org.jooq", "jooq-codegen").versionRef("jooq")
-
+        library("jooq", "org.jooq", "jooq").withoutVersion()
+        library("jooq-codegen", "org.jooq", "jooq-codegen").withoutVersion()
+        library("jooq-bom", "org.jooq", "jooq-bom").versionRef("jooq")
+        library("gradle-jooq-plugin", "nu.studer", "gradle-jooq-plugin").versionRef("gradle-jooq-plugin")
         // Database library
         library("postgresql", "org.postgresql", "postgresql").versionRef("postgresql")
 
@@ -66,6 +69,7 @@ catalog {
         library("testcontainers-postgresql", "org.testcontainers", "postgresql").versionRef("testcontainers")
         library("testcontainers-junit-jupiter", "org.testcontainers", "junit-jupiter").versionRef("testcontainers")
 
+        library("jetbrains-annotations", "org.jetbrains", "annotations").versionRef("annotations")
         // bundles
         bundle(
             "spring-boot-starter-web-pg-jooq", listOf(
@@ -82,21 +86,6 @@ catalog {
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("catalog") {
-            from(components["versionCatalog"])
-        }
-    }
-
-    repositories {
-        maven {
-            name = "githubPackages"
-            url = uri("https://maven.pkg.github.com/AlexRITIAN/catalog")
-            credentials(PasswordCredentials::class)
-        }
-    }
-}
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
