@@ -1,14 +1,13 @@
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
-    java
     `version-catalog`
     signing
     id("com.vanniktech.maven.publish") version "0.30.0"
 }
 
 group = "io.github.alexritian"
-version = "0.0.9"
+version = "0.0.10"
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -95,7 +94,7 @@ mavenPublishing {
     pom {
         name.set("${project.group}:${project.name}")
         description.set("This project provides runtime support libraries required by Codegen-gradle-plugin")
-        url.set("https://github.com/AlexRITIAN/codegn-gradle-plugin-runtime")
+        url.set("https://github.com/AlexRITIAN/catalog")
 
         licenses {
             license {
@@ -113,9 +112,14 @@ mavenPublishing {
         }
 
         scm {
-            url.set("https://github.com/AlexRITIAN/codegn-gradle-plugin-runtime")
-            connection.set("scm:git:git://github.com/AlexRITIAN/codegn-gradle-plugin-runtime")
-            developerConnection.set("scm:git:ssh://git@github.com:AlexRITIAN/codegn-gradle-plugin-runtime.git")
+            url.set("https://github.com/AlexRITIAN/catalog")
+            connection.set("scm:git:git://github.com/AlexRITIAN/catalog")
+            developerConnection.set("scm:git:ssh://git@github.com:AlexRITIAN/catalog.git")
         }
     }
+}
+
+signing {
+    useGpgCmd()
+    sign(publishing.publications)
 }
