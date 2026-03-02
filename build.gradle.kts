@@ -1,13 +1,11 @@
-import com.vanniktech.maven.publish.SonatypeHost
-
 plugins {
     `version-catalog`
     signing
-    id("com.vanniktech.maven.publish") version "0.30.0"
+    id("com.vanniktech.maven.publish") version "0.36.0"
 }
 
 group = "io.github.alexritian"
-version = "0.0.10"
+version = "0.0.14"
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -17,7 +15,7 @@ repositories {
 catalog {
     versionCatalog {
         // plugin versions
-        version("publish", "0.30.0")
+        version("publish", "0.36.0")
         version("flyway", "10.12.0")
         version("gradle-jooq-plugin", "9.0")
         version("plugin-publish", "1.3.0")
@@ -27,7 +25,7 @@ catalog {
         version("junit-platform-launcher", "1.11.3")
         version("testcontainers", "1.20.3")
         version("spring-boot", "3.5.0")
-        version("jooq", "3.19.23")
+        version("jooq", "3.19.29")
         version("postgresql", "42.7.4")
         version("lombok", "1.18.34")
         version("annotations", "26.0.1")
@@ -57,8 +55,8 @@ catalog {
         library("flyway-database-postgresql", "org.flywaydb", "flyway-database-postgresql").versionRef("flyway")
 
         // JOOQ libraries
-        library("jooq", "org.jooq", "jooq").withoutVersion()
-        library("jooq-codegen", "org.jooq", "jooq-codegen").withoutVersion()
+        library("jooq", "org.jooq", "jooq").versionRef("jooq")
+        library("jooq-codegen", "org.jooq", "jooq-codegen").versionRef("jooq")
         library("jooq-bom", "org.jooq", "jooq-bom").versionRef("jooq")
         library("gradle-jooq-plugin", "nu.studer", "gradle-jooq-plugin").versionRef("gradle-jooq-plugin")
         // Database library
@@ -86,7 +84,7 @@ catalog {
 }
 
 mavenPublishing {
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    publishToMavenCentral()
 
     signAllPublications()
 
