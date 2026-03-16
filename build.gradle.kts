@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.alexritian"
-version = "0.0.15"
+version = "0.0.16"
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -29,7 +29,7 @@ catalog {
         version("postgresql", "42.7.4")
         version("lombok", "1.18.34")
         version("annotations", "26.0.1")
-        version("jackson", "2.20.2")
+        version("jackson", "3.0.4")
 
         // plugins
         plugin("publish", "com.vanniktech.maven.publish").versionRef("publish")
@@ -42,7 +42,7 @@ catalog {
         library("junit-jupiter", "org.junit.jupiter", "junit-jupiter").versionRef("junit-jupiter")
         library("junit-platform-launcher", "org.junit.platform", "junit-platform-launcher").versionRef("junit-platform-launcher")
         library("lombok", "org.projectlombok", "lombok").versionRef("lombok")
-        library("jackson-databind", "com.fasterxml.jackson.core", "jackson-databind").versionRef("jackson")
+        library("jackson-databind", "tools.jackson.core", "jackson-databind").versionRef("jackson")
 
         // Spring Boot libraries
         library("spring-boot-starter", "org.springframework.boot", "spring-boot-starter").versionRef("spring-boot")
